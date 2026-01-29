@@ -68,3 +68,12 @@ use App\Http\Controllers\AuthController;
 // --- COMMIT 1: SIGN IN ---
 Route::get('/signin', [AuthController::class, 'signIn'])->name('signin');
 Route::post('/check-signin', [AuthController::class, 'checkSignIn'])->name('check.signin');
+// --- COMMIT 2: MIDDLEWARE TUỔI ---
+// 1. Route nhập và lưu tuổi
+Route::get('/input-age', [AuthController::class, 'inputAge']);
+Route::post('/save-age', [AuthController::class, 'saveAge'])->name('save.age');
+
+// 2. Route cần bảo vệ bởi Middleware (Gom nhóm)
+Route::middleware(['check.age'])->group(function () {
+    Route::get('/admin', [AuthController::class, 'adminPage'])->name('admin.page');
+});
