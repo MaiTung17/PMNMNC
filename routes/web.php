@@ -27,7 +27,15 @@ Route::prefix('product')->group(function () {
     Route::get('/add', function () {
         return view('product.add');
     })->name('product.add');
-
+    // Route: Xử lý khi bấm nút Lưu (POST)
+    Route::post('/save', function (\Illuminate\Http\Request $request) {
+        // Lấy tên sản phẩm người dùng nhập
+        $name = $request->input('name');
+        
+        // Trả về thông báo (hoặc redirect về trang danh sách)
+        return "Đã thêm thành công sản phẩm: " . $name . " (Demo)";
+    })->name('product.save');
+    // ---------------------
     // /product/{id}
     Route::get('/{id?}', function ($id = '123') {
         return "Chi tiết sản phẩm có ID: $id";
