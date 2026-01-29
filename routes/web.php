@@ -63,3 +63,8 @@ Route::get('/banco/{n}', function ($n) {
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
+use App\Http\Controllers\AuthController;
+
+// --- COMMIT 1: SIGN IN ---
+Route::get('/signin', [AuthController::class, 'signIn'])->name('signin');
+Route::post('/check-signin', [AuthController::class, 'checkSignIn'])->name('check.signin');
