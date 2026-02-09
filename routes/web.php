@@ -85,3 +85,14 @@ Route::post('/save-age', [AuthController::class, 'saveAge'])->name('save.age');
 Route::middleware(['check.age'])->group(function () {
     Route::get('/admin', [AuthController::class, 'adminPage'])->name('admin.page');
 });
+
+use App\Http\Controllers\CategoryController;
+
+Route::prefix('category')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+});
