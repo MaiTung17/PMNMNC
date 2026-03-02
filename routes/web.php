@@ -16,31 +16,6 @@ Route::get('/', function () {
 | Product group
 |--------------------------------------------------------------------------
 */
-Route::prefix('product')->group(function () {
-
-    // /product
-    Route::get('/', function () {
-        return view('product.index');
-    })->name('product.index');
-
-    // /product/add
-    Route::get('/add', function () {
-        return view('product.add');
-    })->name('product.add');
-    // Route: Xử lý khi bấm nút Lưu (POST)
-    Route::post('/save', function (\Illuminate\Http\Request $request) {
-        // Lấy tên sản phẩm người dùng nhập
-        $name = $request->input('name');
-        
-        // Trả về thông báo (hoặc redirect về trang danh sách)
-        return "Đã thêm thành công sản phẩm: " . $name . " (Demo)";
-    })->name('product.save');
-    // ---------------------
-    // /product/{id}
-    Route::get('/{id?}', function ($id = '123') {
-        return "Chi tiết sản phẩm có ID: $id";
-    });
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +60,6 @@ Route::post('/save-age', [AuthController::class, 'saveAge'])->name('save.age');
 Route::middleware(['check.age'])->group(function () {
     Route::get('/admin', [AuthController::class, 'adminPage'])->name('admin.page');
 });
-
 use App\Http\Controllers\CategoryController;
 
 Route::prefix('category')->group(function () {
@@ -95,4 +69,15 @@ Route::prefix('category')->group(function () {
     Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+});
+
+use App\Http\Controllers\ProductController;
+
+Route::prefix('product')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 });

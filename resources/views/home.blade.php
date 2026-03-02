@@ -32,5 +32,10 @@
         
         <li><a href="{{ url('/admin') }}"> Vào thử trang Admin (Test Middleware)</a></li>
     </ul>
+    <h2>Quản lý Sản phẩm </h2>
+    <ul>
+    <li><a href="{{ route('product.index') }}"> Xem danh sách Sản phẩm</a></li>
+    <li><a href="{{ route('product.create') }}"> Thêm mới Sản phẩm</a></li>
+    </ul>
 </body>
 </html>
